@@ -3,219 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DITEC 360 | Governança Estratégica</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>DITEC 360 | Dashboard de Governança</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --brb-deep: #0e2a5c;
-            --brb-accent: #0070d2;
-            --bg-glass: rgba(255, 255, 255, 0.8);
-            --text-main: #2c3e50;
+            --brb-blue: #0070d2;
+            --brb-dark: #0e2a5c;
+            --bg-color: #fcfdfe;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text-primary: #1a1f36;
+            --text-secondary: #4f566b;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f8f9fb;
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 100% 0%, rgba(0, 112, 210, 0.05) 0%, transparent 25%);
             margin: 0;
-            line-height: 1.6;
+            color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Background Decorativo Sutil */
-        body::before {
-            content: "";
-            position: fixed;
-            top: -10%; right: -10%;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(0,112,210,0.05) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1100px;
+        .wrapper {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
 
-        /* Header Minimalista */
+        /* --- Header Minimalista --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 80px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .logo-area {
+        .brand-box {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        /* Espaço para o Logo que você vai enviar */
-        .brb-logo-img {
-            height: 45px;
-            object-fit: contain;
+        .logo-brb {
+            height: 42px; /* Altura ideal para logos horizontais */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
         }
 
-        .ditec-tag {
-            background: var(--brb-deep);
+        .ditec-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            background: var(--brb-dark);
             color: white;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            border-radius: 50px;
         }
 
-        /* Grid de Navegação Elegante */
-        .nav-grid {
+        /* --- Grid Layout --- */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
-        .nav-section {
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
+        /* --- Card Executive Style --- */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 35px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-section:hover {
-            transform: translateY(-5px);
-            border-color: var(--brb-accent);
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--brb-blue);
+            opacity: 0;
+            transition: 0.3s;
         }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(14, 42, 92, 0.08);
+            border-color: rgba(0, 112, 210, 0.2);
+        }
+
+        .glass-card:hover::before { opacity: 1; }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: var(--brb-blue);
             margin-bottom: 25px;
-            color: var(--brb-deep);
-            font-weight: 600;
-            font-size: 1.2rem;
+            display: inline-block;
         }
 
-        .section-title i {
-            color: var(--brb-accent);
-            font-size: 1.4rem;
+        .glass-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: var(--brb-dark);
         }
 
-        .link-list {
+        /* --- Links List --- */
+        .nav-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .link-item {
+        .nav-list li {
             margin-bottom: 12px;
         }
 
-        .link-item a {
+        .nav-list a {
             text-decoration: none;
-            color: #64748b;
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f5f9;
-            transition: all 0.2s ease;
+            justify-content: space-between;
+            transition: 0.2s;
+            padding: 4px 0;
         }
 
-        .link-item a:hover {
-            color: var(--brb-accent);
-            padding-left: 8px;
-            border-bottom-color: var(--brb-accent);
+        .nav-list a:hover {
+            color: var(--brb-blue);
+            transform: translateX(5px);
         }
 
-        .link-item a i {
+        .nav-list a i {
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        /* Footer sutil */
+        footer {
+            margin-top: 100px;
+            text-align: center;
             font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .link-item a:hover i {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .nav-grid { grid-template-columns: 1fr; }
+            color: #b5b9c1;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="wrapper">
     <header>
-        <div class="logo-area">
-            <!-- Substitua o src abaixo pelo nome do arquivo que você me enviar -->
-            <img src="logo-brb.png" alt="BRB" class="brb-logo-img">
-            <span class="ditec-tag">DITEC 360°</span>
+        <div class="brand-box">
+            <!-- Certifique-se de subir o arquivo com este nome exato no GitHub -->
+            <img src="logo-brb.png" alt="BRB Logo" class="logo-brb">
+            <span class="ditec-badge">DITEC 360</span>
         </div>
-        <div style="text-align: right; color: #94a3b8; font-size: 0.8rem;">
-            Governança e TI <br> <strong>NUQUA</strong>
+        <div style="text-align: right;">
+            <small style="color: var(--text-secondary); font-weight: 600;">Sarah Geyce</small><br>
+            <small style="color: #b5b9c1;">IT Governance | NUQUA</small>
         </div>
     </header>
 
-    <main class="nav-grid">
-        <!-- Estratégia -->
-        <section class="nav-section">
-            <div class="section-title">
-                <i class="fa-light fa-compass"></i>
-                <span>Estratégia</span>
-            </div>
-            <ul class="link-list">
-                <li class="link-item"><a href="#">Plano Diretor (PETI) <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Metas SMART <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Priorização Jira <i class="fa-solid fa-arrow-right"></i></a></li>
+    <main class="dashboard-grid">
+        <!-- Card 1: Estratégia -->
+        <div class="glass-card">
+            <i class="fa-light fa-compass-drafting card-icon"></i>
+            <h2>Estratégia</h2>
+            <ul class="nav-list">
+                <li><a href="#">Diretrizes PETI <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Metas SMART <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Mapa Estratégico <i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
-        </section>
+        </div>
 
-        <!-- Operação -->
-        <section class="nav-section">
-            <div class="section-title">
-                <i class="fa-light fa-gears"></i>
-                <span>Operação</span>
-            </div>
-            <ul class="link-list">
-                <li class="link-item"><a href="#">Central de Atendimento <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Gestão de Mudanças <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Métricas de SLA <i class="fa-solid fa-arrow-right"></i></a></li>
+        <!-- Card 2: Operação -->
+        <div class="glass-card">
+            <i class="fa-light fa-layer-group card-icon"></i>
+            <h2>Operação</h2>
+            <ul class="nav-list">
+                <li><a href="#">Priorização Jira <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Central de Atendimento <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Relatórios Mensais <i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
-        </section>
+        </div>
 
-        <!-- Financeiro -->
-        <section class="nav-section">
-            <div class="section-title">
-                <i class="fa-light fa-chart-pie"></i>
-                <span>Financeiro</span>
-            </div>
-            <ul class="link-list">
-                <li class="link-item"><a href="#">Gestão Orçamentária <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Contratos DITEC <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Custo de Inovação <i class="fa-solid fa-arrow-right"></i></a></li>
+        <!-- Card 3: Financeiro -->
+        <div class="glass-card">
+            <i class="fa-light fa-chart-line-up card-icon"></i>
+            <h2>Financeiro</h2>
+            <ul class="nav-list">
+                <li><a href="#">Orçamento DITEC <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Contratos de TI <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Gestão de Custos <i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
-        </section>
+        </div>
 
-        <!-- Conformidade -->
-        <section class="nav-section">
-            <div class="section-title">
-                <i class="fa-light fa-shield-check"></i>
-                <span>Conformidade</span>
-            </div>
-            <ul class="link-list">
-                <li class="link-item"><a href="#">Auditoria e Riscos <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Planos de Ação <i class="fa-solid fa-arrow-right"></i></a></li>
-                <li class="link-item"><a href="#">Políticas de Segurança <i class="fa-solid fa-arrow-right"></i></a></li>
+        <!-- Card 4: Conformidade -->
+        <div class="glass-card">
+            <i class="fa-light fa-shield-halved card-icon"></i>
+            <h2>Conformidade</h2>
+            <ul class="nav-list">
+                <li><a href="#">Auditoria e Riscos <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Planos de Ação <i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#">Normativos Internos <i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
-        </section>
+        </div>
     </main>
+
+    <footer>
+        &copy; 2026 BANCO DE BRASÍLIA | DIRETORIA DE TECNOLOGIA
+    </footer>
 </div>
 
 </body>
